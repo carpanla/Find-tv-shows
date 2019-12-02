@@ -3,20 +3,21 @@
     
     <head>
         <meta charset="UTF-8" />
-        <title>Adalab Web Starter Kit</title>
+        <title>Buscador de Series</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="./favicon.png" />
+        <link rel="icon" href="./icon_tv.png" />
         <link rel="stylesheet" href="./assets/css/main.css" />
     </head>
     
     <body>
-        <div class="page">
-            <header class="page__header">Header</header>
-            <main class="page__main">Main</main> <a class="link__adalab" href="https://adalab.es" target="_blank">Adalab</a>
-
-            <a
-            class="link__github" href="https://github.com" target="_blank">GitHub</a>
-        </div>
+        <form action="" method="post" id="search-form">
+            <input id='search-input' type="text" value="">
+            <button id="search-button" type="button">Search</button>
+        </form>
+        <main>
+            <ul id="series-list"></ul>
+        </main>
+        <script src="./assets/js/main.js" type="text/javascript"></script>
     </body>
 
 </html>
