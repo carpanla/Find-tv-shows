@@ -6,20 +6,58 @@
 }
 
 body {
-  background-color: #fabada;
   margin: 0;
   height: 100vh;
+  width: 100wh;
+}
+
+ul {
+  display: inline-block;
+}
+
+li {
+  background-color: #cacaca;
+  margin-right: 20px;
+  margin-left: 600px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
+form {
+  margin-left: 20px;
 }
 
 .input {
   height: 30px;
-  border-radius: 10px;
   width: 300px;
+  border: 0;
+  border-bottom: 1px solid mediumvioletred;
 }
 
 .button {
   height: 30px;
-  border-radius: 10px;
+  color: white;
+  background-color: mediumvioletred;
+  border: 0;
+}
+
+h2 {
+  margin-top: -10px;
+  margin-left: 20px;
+}
+
+.favourite {
+  background-color: mediumvioletred;
+  color: white;
+}
+
+.nofavourite {
+  background-color: #cacaca;
 }
 
 /*# sourceMappingURL=main.css.map */
