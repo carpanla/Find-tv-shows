@@ -1,6 +1,7 @@
 * {
 	box-sizing: border-box;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	list-style: none;
 }
 
 body {
@@ -8,3 +9,15 @@ body {
 	margin: 0;
 	height: 100vh;
 }
+
+.input {
+	height: 30px;
+	border-radius: 10px;
+	width: 300px;
+}
+.button {
+	height: 30px;
+	border-radius: 10px;
+}
+
+
