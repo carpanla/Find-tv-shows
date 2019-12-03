@@ -9,26 +9,6 @@ const favUl = document.querySelector('#fav-list');
 
 let favourites = [];
 
-//Conexión a localStorage 
-
-if (localStorage.getItem('favs') !== null) {
-  favourites = JSON.parse(localStorage.getItem('favs'));
-  console.log(favourites)
-  for (const item of favourites) {
-    const elementLiLocal = document.createElement('li');
-    const elementTitleLocal = document.createElement('h2');
-    const elementImageLocal = document.createElement('img');
-    const titleLocal = item.titleLocal;
-    const imgLocal = item.imgLocal;
-    const titleLocalText = document.createTextNode(titleLocal);
-    elementTitleLocal.appendChild(titleLocalText);
-    elementImageLocal.setAttribute('src', imgLocal);
-    elementLiLocal.appendChild(elementTitleLocal);
-    elementLiLocal.appendChild(elementImageLocal);
-    favUl.appendChild(elementLiLocal);
-  }
-}
-
 //Función para conectarnos y obtener la información que queremos de la api
 function getInfo(){
   //console.log('holi');
@@ -39,6 +19,7 @@ function getInfo(){
 
   //Función para pintar los datos que nos llegan de la api
   const displayShow = (data) => {
+    elementUl.innerHTML = '';
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       console.log('estoy en función displayShow', item);
@@ -61,6 +42,12 @@ function getInfo(){
       elementLi.appendChild(elementImg);
       elementUl.appendChild(elementLi);
 
+      /*if (showTitle.includes(name)) {
+        elementLi.classList.remove('hidden');
+      }
+      else {
+        elementLi.classList.add('hidden');
+      }*/
       //listener para ejecutar función de elementos favoritos
       elementLi.addEventListener('click', function(event) { //añado un listener al elemento li para que se ejecuten funciones posteriores
         const showImage = showImages.medium;
@@ -112,8 +99,30 @@ function favShow (event, name, image){
   liFav.appendChild(imageFav);
   favUl.appendChild(liFav);
 
+  //Añado elementos a localStorage
   localStorage.setItem('favs', JSON.stringify(favourites));
 }
+
+//LocalStorage 
+function showLocal(){
+  favourites = JSON.parse(localStorage.getItem('favs'));
+  console.log(favourites);
+  if (localStorage.getItem('favs') !== null) {
+    for (const item of favourites){
+      let elementLiLocal = document.createElement('li');
+      let elementNameLocal = document.createElement('h2');
+      let elementImageLocal = document.createElement('img');
+      elementImageLocal.src = item.pic;
+      let elementTextName = document.createTextNode(item.title);
+      elementNameLocal.appendChild(elementTextName);
+      elementLiLocal.appendChild(elementNameLocal);
+      elementLiLocal.appendChild(elementImageLocal);
+      favUl.appendChild(elementLiLocal);
+
+    }
+  }
+}
+
 
 //Función para habilitar tecla enter
 
@@ -124,5 +133,6 @@ function submitHandler(event){
 
 form.addEventListener('submit', submitHandler);
 button.addEventListener('click', getInfo);
+window.addEventListener('load', showLocal);
 
 //# sourceMappingURL=main.js.map

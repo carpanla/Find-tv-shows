@@ -112,4 +112,8 @@ form {
   background-color: #cacaca;
 }
 
+.hidden {
+  display: none;
+}
+
 /*# sourceMappingURL=main.css.map */
