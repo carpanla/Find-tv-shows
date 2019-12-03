@@ -1,5 +1,6 @@
 'use strict';
 
+
 const input = document.querySelector('#search-input');
 const button = document.querySelector('#search-button');
 const form = document.querySelector('#search-form');
@@ -8,7 +9,7 @@ const elementUl = document.querySelector('#series-list');
 const favUl = document.querySelector('#fav-list');
 const resetButton = document.querySelector('#reset-button');
 
-let favourites = [];
+let favourites;
 
 //Función para conectarnos y obtener la información que queremos de la api
 function getInfo(){
@@ -17,7 +18,6 @@ function getInfo(){
   fetch(urlBase + name)
     .then(response => response.json())
     .then(data => displayShow(data));
-
   //Función para pintar los datos que nos llegan de la api
   const displayShow = (data) => {
     elementUl.innerHTML = '';
@@ -34,7 +34,6 @@ function getInfo(){
       const elementLi = document.createElement('li');
       const nameText = document.createTextNode(showTitle);
       elementLi.classList.add('nofavourite');
-
       //Cada elemento que devuelve el buscador se mostrará en un "li" 
       //que, mediante js, incluiremos dentro del "ul" vacío que hay en el html.
       
@@ -42,7 +41,6 @@ function getInfo(){
       elementLi.appendChild(elementName);
       elementLi.appendChild(elementImg);
       elementUl.appendChild(elementLi);
-
       /*if (showTitle.includes(name)) {
         elementLi.classList.remove('hidden');
       }
@@ -54,7 +52,6 @@ function getInfo(){
         const showImage = showImages.medium;
         favShow(event, showTitle, showImage);
       }); //estos parametros se los pasa a la funcion favshow
-
       //Cuando el resultado de la búsqueda no tiene imagen para mostrar, le asignamos una mediante el servicio placeholder.com
       if (showImages === null) {
         elementImg.setAttribute('src','https://via.placeholder.com/210x295/ffffff/666666/?text=TV');
@@ -65,9 +62,7 @@ function getInfo(){
     }
   }
 }
-
 //Defino función para añadir series a la lista de favoritas
-
 function favShow (event, name, image){
   console.log('llamando');
   const element = event.currentTarget;
@@ -85,8 +80,8 @@ function favShow (event, name, image){
       title: name,
       pic: image
     };
+    console.log(object);
     favourites.push(object);
-    console.log(favourites);
   }
   //creo los elementos necesarios para pintar las series favoritas
   const imageFav = document.createElement('img');
@@ -94,7 +89,6 @@ function favShow (event, name, image){
   const nameFav = document.createElement('h2');
   const liFav = document.createElement('li');
   const textFav = document.createTextNode(name);
-
   nameFav.appendChild(textFav);
   liFav.appendChild(nameFav);
   liFav.appendChild(imageFav);
@@ -104,11 +98,11 @@ function favShow (event, name, image){
   localStorage.setItem('favs', JSON.stringify(favourites));
 }
 
+//LocalStorage 
 //Defino una función para pintar los datos guardados en LocalStorage y la ejecuto cuando se carga la página
 function showLocal(){
-  favourites = JSON.parse(localStorage.getItem('favs'));
-  console.log(favourites);
   if (localStorage.getItem('favs') !== null) {
+    favourites = JSON.parse(localStorage.getItem('favs'));console.log(favourites)
     for (const item of favourites){
       let elementLiLocal = document.createElement('li');
       let elementNameLocal = document.createElement('h2');
@@ -119,7 +113,10 @@ function showLocal(){
       elementLiLocal.appendChild(elementNameLocal);
       elementLiLocal.appendChild(elementImageLocal);
       favUl.appendChild(elementLiLocal);
+
     }
+  } else {
+    favourites = [];
   }
 }
 
@@ -139,9 +136,7 @@ function submitHandler(event){
   event.preventDefault(); //para que no se recargue la página por defecto
   getInfo(); //la función que he definido al principio para obtener datos
 }
-
 form.addEventListener('submit', submitHandler);
 button.addEventListener('click', getInfo);
 window.addEventListener('load', showLocal);
-
 //# sourceMappingURL=main.js.map
