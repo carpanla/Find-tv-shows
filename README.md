@@ -1,11 +1,13 @@
 
 # Buscador de series
-El proyecto consiste en diseñar un buscador de series conectándonos a un api:  http://api.tvmaze.com/search/shows?q=
+El proyecto consiste en diseñar un buscador de series conectándonos a una api:  http://api.tvmaze.com/search/shows?q=
 
 Una vez obtenido el resultado de la búsqueda se podrán marcar las series como favoritas y guardarlas en local storage, apareciendo también en un listado de favoritas. 
 
 Para realizar el ejercicio se han establecido diferentes hitos:
+
 ** En primer lugar hay que realizar una estructura básica de la web. La página consta de dos partes:
+
 1. Un campo de texto y un botón para buscar series por su título.
 2. Un listado de resultados de búsqueda donde aparece el cartel de la serie y el título.
 
