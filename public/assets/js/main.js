@@ -11,7 +11,11 @@ const resetButton = document.querySelector('#reset-button');
 
 let favourites;
 
+
+//*****************FUNCIÓN GET INFO para hacer fetch**********************************
+
 //Función para conectarnos y obtener la información que queremos de la api
+
 function getInfo(){
   //console.log('holi');
   const name = input.value.toLowerCase();
@@ -58,7 +62,10 @@ function getInfo(){
     }
   }
 }
+//**************************FUNCIÓN FAVSHOW para crear lista de favoritos******************** 
+
 //Defino función para añadir series a la lista de favoritas
+
 function favShow (element, name, image){
   console.log('holi');
   //añadiendo y borrando clases de css se definen los elementos que formarán parte de "favourites"
@@ -70,6 +77,7 @@ function favShow (element, name, image){
     element.classList.add('nofavourite');
   }
   //determino que elementos formarán parte del array de favoritos
+
   if (element.classList.contains('favourite')) {
     const object = {
       title: name,
@@ -79,6 +87,7 @@ function favShow (element, name, image){
     favourites.push(object);
   }
   //creo los elementos necesarios para pintar las series favoritas
+
   const imageFav = document.createElement('img');
   imageFav.setAttribute('src', image);
   const nameFav = document.createElement('h2');
@@ -89,12 +98,14 @@ function favShow (element, name, image){
   liFav.appendChild(imageFav);
   favUl.appendChild(liFav);
 
-  //Añado elementos a localStorage
+  //Añado elementos a LOCALSTORAGE
   localStorage.setItem('favs', JSON.stringify(favourites));
 }
 
-//LocalStorage 
+//**************LOCAL STORAGE*******FUNCIÓN SHOWLOCAL******************************************
+
 //Defino una función para pintar los datos guardados en LocalStorage y la ejecuto cuando se carga la página
+
 function showLocal(){
   if (localStorage.getItem('favs') !== null) {
     favourites = JSON.parse(localStorage.getItem('favs'));
@@ -115,22 +126,30 @@ function showLocal(){
   }
 }
 
+//**********************RESET BUTTON********************************************************** 
+
 //Habilitar botón reset que vacía la lista de favoritas
 
 function reset(){
   console.log('función reset');
+  elementUl.innerHTML = '';
   favUl.innerHTML = '';
-  localStorage.removeItem('favs');
+  localStorage.clear();
+  //localStorage.removeItem('favs');
 }
 
 resetButton.addEventListener('click', reset);
 
+//**********************TECLA INTRO***********************************************************
 //Función para habilitar tecla enter
 
 function submitHandler(event){
   event.preventDefault(); //para que no se recargue la página por defecto
   getInfo(); //la función que he definido al principio para obtener datos
 }
+
+
+//**********************LISTENERS**************************************************************
 form.addEventListener('submit', submitHandler);
 button.addEventListener('click', getInfo);
 window.addEventListener('load', showLocal);
