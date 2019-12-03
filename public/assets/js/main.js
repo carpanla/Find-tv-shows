@@ -41,17 +41,13 @@ function getInfo(){
       elementLi.appendChild(elementName);
       elementLi.appendChild(elementImg);
       elementUl.appendChild(elementLi);
-      /*if (showTitle.includes(name)) {
-        elementLi.classList.remove('hidden');
-      }
-      else {
-        elementLi.classList.add('hidden');
-      }*/
+      
       //listener para ejecutar función de elementos favoritos
-      elementLi.addEventListener('click', function(event) { //añado un listener al elemento li para que se ejecuten funciones posteriores
-        const showImage = showImages.medium;
-        favShow(event, showTitle, showImage);
-      }); //estos parametros se los pasa a la funcion favshow
+      elementLi.addEventListener('click', function(event) { //añado un listener al elemento li para que se ejecuten funciones posteriores        const showImage = showImages.medium;
+        const showImage = showImages ? showImages.medium : 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+        favShow(elementLi, showTitle, showImage);
+      }); //estos parámetros se los pasa a la funcion favshow
+
       //Cuando el resultado de la búsqueda no tiene imagen para mostrar, le asignamos una mediante el servicio placeholder.com
       if (showImages === null) {
         elementImg.setAttribute('src','https://via.placeholder.com/210x295/ffffff/666666/?text=TV');
@@ -63,9 +59,8 @@ function getInfo(){
   }
 }
 //Defino función para añadir series a la lista de favoritas
-function favShow (event, name, image){
-  console.log('llamando');
-  const element = event.currentTarget;
+function favShow (element, name, image){
+  console.log('holi');
   //añadiendo y borrando clases de css se definen los elementos que formarán parte de "favourites"
   if (element.classList.contains('nofavourite')){
     element.classList.remove('nofavourite');
