@@ -6,6 +6,7 @@ const form = document.querySelector('#search-form');
 const urlBase = 'http://api.tvmaze.com/search/shows?q=';
 const elementUl = document.querySelector('#series-list');
 const favUl = document.querySelector('#fav-list');
+const resetButton = document.querySelector('#reset-button');
 
 let favourites = [];
 
@@ -103,7 +104,7 @@ function favShow (event, name, image){
   localStorage.setItem('favs', JSON.stringify(favourites));
 }
 
-//LocalStorage 
+//Defino una función para pintar los datos guardados en LocalStorage y la ejecuto cuando se carga la página
 function showLocal(){
   favourites = JSON.parse(localStorage.getItem('favs'));
   console.log(favourites);
@@ -118,11 +119,19 @@ function showLocal(){
       elementLiLocal.appendChild(elementNameLocal);
       elementLiLocal.appendChild(elementImageLocal);
       favUl.appendChild(elementLiLocal);
-
     }
   }
 }
 
+//Habilitar botón reset que vacía la lista de favoritas
+
+function reset(){
+  console.log('función reset');
+  favUl.innerHTML = '';
+  localStorage.removeItem('favs');
+}
+
+resetButton.addEventListener('click', reset);
 
 //Función para habilitar tecla enter
 

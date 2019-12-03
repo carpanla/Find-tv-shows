@@ -49,11 +49,14 @@ li {
 }
 h1 {
 	margin-left: 20px;
-	margin-top: 50px;
-	color: mediumvioletred;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	
 }
 h2 {
 	margin-left: 20px;
+	text-align: center;
+	color: mediumvioletred;
 }
 form {
 	margin-left: 20px;
@@ -61,13 +64,24 @@ form {
 .input {
 	height: 30px;
 	border: 0;
+	margin-top: 20px;
+	min-width: 230px;
 	border-bottom: 1px solid mediumvioletred;
 }
 .button {
 	height: 30px;
+	width: 60px;
 	color: white;
 	background-color: mediumvioletred;
 	border: 0;
+}
+.btn {
+	height: 30px;
+	margin-left: 20px;
+	color: mediumvioletred;
+	background-color: #cacaca;
+	border: 0;
+	width: 293px;
 	
 }
 
