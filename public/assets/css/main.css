@@ -26,6 +26,12 @@ li {
 h1 {
   margin-left: 20px;
   margin-top: 50px;
+  color: mediumvioletred;
+}
+
+h2 {
+  margin-top: -10px;
+  margin-left: 20px;
 }
 
 form {
@@ -44,11 +50,6 @@ form {
   color: white;
   background-color: mediumvioletred;
   border: 0;
-}
-
-h2 {
-  margin-top: -10px;
-  margin-left: 20px;
 }
 
 .favourite {
