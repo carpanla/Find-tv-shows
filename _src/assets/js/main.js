@@ -102,7 +102,8 @@ function favShow (event, name, image){
 //Defino una función para pintar los datos guardados en LocalStorage y la ejecuto cuando se carga la página
 function showLocal(){
   if (localStorage.getItem('favs') !== null) {
-    favourites = JSON.parse(localStorage.getItem('favs'));console.log(favourites)
+    favourites = JSON.parse(localStorage.getItem('favs'));
+    console.log(favourites)
     for (const item of favourites){
       let elementLiLocal = document.createElement('li');
       let elementNameLocal = document.createElement('h2');
@@ -113,7 +114,6 @@ function showLocal(){
       elementLiLocal.appendChild(elementNameLocal);
       elementLiLocal.appendChild(elementImageLocal);
       favUl.appendChild(elementLiLocal);
-
     }
   } else {
     favourites = [];
