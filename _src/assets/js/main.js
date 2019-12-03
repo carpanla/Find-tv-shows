@@ -9,6 +9,26 @@ const favUl = document.querySelector('#fav-list');
 
 let favourites = [];
 
+//Conexión a localStorage 
+
+if (localStorage.getItem('favs') !== null) {
+  favourites = JSON.parse(localStorage.getItem('favs'));
+  console.log(favourites)
+  for (const item of favourites) {
+    const elementLiLocal = document.createElement('li');
+    const elementTitleLocal = document.createElement('h2');
+    const elementImageLocal = document.createElement('img');
+    const titleLocal = item.titleLocal;
+    const imgLocal = item.imgLocal;
+    const titleLocalText = document.createTextNode(titleLocal);
+    elementTitleLocal.appendChild(titleLocalText);
+    elementImageLocal.setAttribute('src', imgLocal);
+    elementLiLocal.appendChild(elementTitleLocal);
+    elementLiLocal.appendChild(elementImageLocal);
+    favUl.appendChild(elementLiLocal);
+  }
+}
+
 //Función para conectarnos y obtener la información que queremos de la api
 function getInfo(){
   //console.log('holi');
@@ -43,9 +63,9 @@ function getInfo(){
 
       //listener para ejecutar función de elementos favoritos
       elementLi.addEventListener('click', function(event) { //añado un listener al elemento li para que se ejecuten funciones posteriores
-        const showImage = showImages ? showImages.medium : 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
-        favShow(elementLi, showTitle, showImage);
-      }); //estos parámetros se los pasa a la funcion favshow
+        const showImage = showImages.medium;
+        favShow(event, showTitle, showImage);
+      }); //estos parametros se los pasa a la funcion favshow
 
       //Cuando el resultado de la búsqueda no tiene imagen para mostrar, le asignamos una mediante el servicio placeholder.com
       if (showImages === null) {
@@ -60,8 +80,9 @@ function getInfo(){
 
 //Defino función para añadir series a la lista de favoritas
 
-function favShow (element, name, image){
-  //console.log('llamando');
+function favShow (event, name, image){
+  console.log('llamando');
+  const element = event.currentTarget;
   //añadiendo y borrando clases de css se definen los elementos que formarán parte de "favourites"
   if (element.classList.contains('nofavourite')){
     element.classList.remove('nofavourite');
@@ -90,6 +111,8 @@ function favShow (element, name, image){
   liFav.appendChild(nameFav);
   liFav.appendChild(imageFav);
   favUl.appendChild(liFav);
+
+  localStorage.setItem('favs', JSON.stringify(favourites));
 }
 
 //Función para habilitar tecla enter
