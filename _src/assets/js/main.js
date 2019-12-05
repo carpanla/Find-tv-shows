@@ -8,7 +8,9 @@ const urlBase = 'http://api.tvmaze.com/search/shows?q=';
 const elementUl = document.querySelector('#series-list');
 const favUl = document.querySelector('#fav-list');
 const resetButton = document.querySelector('#reset-button');
+const logButton = document.querySelector('#log-button');
 
+const languages = ['English', 'Spanish', 'Portuguese'];
 let favourites;
 
 
@@ -31,12 +33,18 @@ function getInfo(){
       const showItem = item.show;
       const showTitle = showItem.name;
       const showImages = showItem.image;
+      const showLanguage = showItem.language;
       
       //Creo los elementos del DOM que son necesarios para mostrar los elementos de la lista
       const elementImg = document.createElement('img');
       const elementName = document.createElement('h2');
       const elementLi = document.createElement('li');
       const nameText = document.createTextNode(showTitle);
+
+      const elementLang = document.createElement('p');
+      const langText = document.createTextNode(showLanguage);
+      elementLang.appendChild(langText);
+      elementLi.appendChild(elementLang);
       elementLi.classList.add('nofavourite');
       //Cada elemento que devuelve el buscador se mostrará en un "li" 
       //que, mediante js, incluiremos dentro del "ul" vacío que hay en el html.
@@ -45,7 +53,18 @@ function getInfo(){
       elementLi.appendChild(elementName);
       elementLi.appendChild(elementImg);
       elementUl.appendChild(elementLi);
-      
+
+      //Mostrar recomendada o no
+      const message = document.createElement('p');
+      if (languages.indexOf(showLanguage) !== -1) {
+        message.innerHTML = 'Recomendada';
+      } else {
+        message.innerHTML = 'no recomendada';
+      }
+      elementLi.appendChild(message);
+
+
+
       //listener para ejecutar función de elementos favoritos
       elementLi.addEventListener('click', function(event) { //añado un listener al elemento li para que se ejecuten funciones posteriores        const showImage = showImages.medium;
         const showImage = showImages ? showImages.medium : 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
@@ -147,7 +166,13 @@ function submitHandler(event){
   event.preventDefault(); //para que no se recargue la página por defecto
   getInfo(); //la función que he definido al principio para obtener datos
 }
+//************************************************************************************** 
 
+function showFavBtn (){
+  console.log('Tengo'  +  favourites.length  + 'en mi lista');
+}
+
+logButton.addEventListener('click', showFavBtn);
 
 //**********************LISTENERS**************************************************************
 form.addEventListener('submit', submitHandler);
